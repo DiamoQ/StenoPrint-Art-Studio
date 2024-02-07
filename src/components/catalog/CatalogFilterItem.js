@@ -27,7 +27,6 @@ const CatalogFilterItem = ({ item, key }) => {
     return filterCurrent;
   }
 
-  console.log(item)
 
   return (
     <div key={item.key} className={`catalog__goods-filters__filter ${visibleFilter ? 'catalog__goods-filters__filter--active' : ''}`}>

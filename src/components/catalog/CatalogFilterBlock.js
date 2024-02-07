@@ -27,7 +27,7 @@ const CatalogFilterBlock = ({ filters }) => {
       className={`${activeFilter ? 'active' : ' '} catalog__goods-filters__collections catalog__goods-filters__block`}>
       <span className='catalog__goods-filters__name' onClick={(e) => toggleActiveClassForFiltersBlock()}>{title}</span>
       <div className='catalog__goods-filters__wrapper' ref={refComponent2}>
-        {/* {variants.map(item => <CatalogFilterItem item={item} key={key}/>)} */}
+        {variants.map(item => <CatalogFilterItem item={item} key={key}/>)}
       </div>
     </div>
   )
