@@ -1,0 +1,21 @@
+@import "../../styles/index.scss";
+
+#root {
+  height: 100%;
+}
+
+main {
+  min-height: 100%;
+  background-color: $bg;
+  padding-top: 60px;
+  font-family: Gilroy;
+}
+
+.page__title {
+  color: $txt;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%; /* 65px */
+  margin-bottom: 60px;
+}

@@ -1,0 +1,196 @@
+// @import "bootstrap/dist/css/bootstrap.min.css";
+@import './fonts/gilroy/stylesheet.scss';
+
+$containerWidth: 1430px;
+$baseFontSize: 16px;
+
+//breakpoints
+
+$laptops: 1190px;
+$laptops-xs: 991px;
+$tablets: 768px;
+$tablets-xs: 575.98px;
+$phones: 480px;
+$phones-s: 455px;
+$phones-xs: 390px;
+
+//colors
+
+$bg: #FAF8F5;
+$sep: #EDEDF2;
+$txt: #192040;
+$txt2: #828299;
+$white: #fff;
+$main: #FF2E51;
+$main-hover: #FA052E;
+$main-hover-shadow: #FF0D35;
+$text: #181602;
+$text2: #535353;
+$text3: #F5F5F5;
+$purple: #722ED1;
+$yellow: #FFBA33;
+
+@mixin phones-xs{
+  @media screen and (max-width: $phones-xs){
+    @content;
+  }
+}
+
+@mixin phones-s{
+  @media screen and (max-width: $phones-s){
+    @content;
+  }
+}
+
+@mixin phones{
+  @media screen and (max-width: $phones){
+    @content;
+  }
+}
+
+@mixin tablets-xs{
+  @media screen and (max-width: $tablets-xs){
+    @content;
+  }
+}
+
+@mixin tablets{
+  @media screen and (max-width: $tablets){
+    @content;
+  }
+}
+
+@mixin laptops-xs{
+  @media screen and (max-width: $laptops-xs){
+    @content;
+  }
+}
+
+@mixin laptops{
+  @media screen and (max-width: $laptops){
+    @content;
+  }
+}
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    font-size: $baseFontSize;
+    scroll-behavior: smooth;
+
+    @include phones {
+        font-size: 3.333vmin;
+    }
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: inherit;
+}
+
+ul,
+ol {
+    padding: 0;
+    margin: 0;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul li {
+    list-style: none;
+}
+
+body {
+    height: 100%;
+    font-family: "Gilroy", sans-serif;
+    color: #292929;
+    line-height: 1.42;
+    background: #fff;
+    margin: 0px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    flex: 1 0 auto;
+    margin-top: 84px;
+}
+
+.footer {
+    flex: 0 0 auto;
+}
+
+.container {
+    max-width: $containerWidth;
+    margin: 0px auto;
+    position: relative;
+    width: 100%;
+
+    @include laptops {
+        max-width: $laptops;
+        padding: 0 47px;
+    }
+    @include tablets {
+        max-width: $tablets;
+        padding: 0 47px;
+    }
+
+    @include phones {
+        max-width: $phones;
+        padding: 0 24px;
+    }
+}
+
+
+
+
+

@@ -1,0 +1,46 @@
+@import "../../styles/index.scss";
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  // gap: 28px;
+  gap: 10px;
+  margin-bottom: 20px;
+
+  a, 
+  span {
+    color: $txt2;
+    font-family: Gilroy;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  a {
+    cursor: pointer;
+    
+    // &::after {
+    //   content: '/';
+    //   position: absolute;
+    //   right: -18px;
+    //   top: 50%;
+    //   transform: translateY(-50%);
+    // }
+
+    &:nth-of-type(1) { 
+      width: 24px;
+      height: 24px;
+      position: relative;
+      background-image: url('../../assets/home.svg');
+      background-repeat: no-repeat;
+    }
+  }
+
+  
+
+  &:nth-last-child(1) {
+    &::after {
+      content: '';
+    }
+  }
+}
