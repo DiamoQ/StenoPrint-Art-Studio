@@ -29,7 +29,6 @@ const CatalogGoods = () => {
   }
 
   const renderGoodsList = (arr) => {
-
     if (arr.length === 0) {
       return <h2>Товаров пока нет...</h2>
     }

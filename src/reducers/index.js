@@ -2,6 +2,7 @@ const initialState = {
   goods: [],
   goodsLoadingStatus: 'idle',
   filters: [],
+  activeFilters: [],
   filtersLoadingStatus: 'idle',
 }
 
@@ -39,6 +40,16 @@ const reducer = (state = initialState, action) => {
           ...state,
           filtersLoadingStatus: 'error'
         }
+      // case 'ACTIVE_FILTERS_ADDED':
+      //     return {
+      //       ...state,
+      //       activeFilters: action.payload,
+      //     }
+      // case 'ACTIVE_FILTERS_DELETED':
+      //     return {
+      //       ...state,
+      //       activeFilters: activeFilters.filter(item => item !== action.payload),
+      //     }
       default: return state
   }
 }

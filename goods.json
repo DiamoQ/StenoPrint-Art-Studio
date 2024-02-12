@@ -16,6 +16,7 @@
         "safety": "Пожарный сертификат Г1 (Слабогорючие материалы).",
         "other": "Все наши обои на 100% экологичны. Сертификаты: UL GREENGUARD GOLD (чернила), OEKO-TEX® Standard 100 (Материалы)."
       },
+      "catalogFilter": "Дизайнерские обои",
       "collection": [
         "Цветы",
         "Модерн",
@@ -70,6 +71,7 @@
         "safety": "Пожарный сертификат Г1 (Слабогорючие материалы).",
         "other": "Все наши обои на 100% экологичны. Сертификаты: UL GREENGUARD GOLD (чернила), OEKO-TEX® Standard 100 (Материалы)."
       },
+      "catalogFilter": "Фирменные обои",
       "collection": [
         "Цветы",
         "Модерн",
@@ -109,94 +111,119 @@
       ]
     }
   ],
-  "filters": [
-    {
-      "title": "Коллекция",
-      "key": "collection",
-      "variants": [
+  "filters": {
+    "catalogFilter": [
+      {
+        "title": "Дизайнерские обои",
+        "key": "designWrapper",
+        "photo1": "photo1.png",
+        "photo2": "photo2.png",
+        "photo3": "photo3.png"
+      },
+      {
+        "title": "Фирменные обои",
+        "key": "firmWrapper",
+        "photo1": "photo1.png",
+        "photo2": "photo2.png",
+        "photo3": "photo3.png"
+      },
+      {
+        "title": "Виниловые обои",
+        "key": "vinilWrapper",
+        "photo1": "photo1.png",
+        "photo2": "photo2.png",
+        "photo3": "photo3.png"
+      }
+    ],
+    "wrapperFilters": [
+      {
+        "title": "Коллекция",
+        "wrapperKey": "collection",
+        "variants": [
+          {
+            "name": "Градиенты",
+            "filterKey": "gradient"
+          },
+          {
+            "name": "Акварель",
+            "filterKey": "acvarel"
+          },
+          {
+            "name": "Модерн",
+            "filterKey": "modern"
+          },
+          {
+            "name": "Цветы",
+            "filterKey": "flowers"
+          },
+          {
+            "name": "Классика",
+            "filterKey": "classic"
+          }
+        ]
+      },
+      {
+        "title": "Материал",
+        "wrapperKey": "material",
+        "variants": [
         {
-          "name": "Градиенты",
-          "key": "gradient"
+            "name": "Флизелин",
+            "filterKey": "flizelin"
         },
         {
-          "name": "Акварель",
-          "key": "acvarel"
+            "name": "Бумага",
+            "filterKey": "papper"
         },
         {
-          "name": "Модерн",
-          "key": "modern"
+            "name": "Стеклообои",
+            "filterKey": "glassWallpaper"
         },
         {
-          "name": "Цветы",
-          "key": "flowers"
-        },
-        {
-          "name": "Классика",
-          "key": "classic"
+            "name": "Жидкие",
+            "filterKey": "liquid"
         }
       ]
-    },
-    {
-      "title": "Материал",
-      "key": "material",
-      "variants": [
-      {
-          "name": "Флизелин",
-          "key": "flizelin"
       },
       {
-          "name": "Бумага",
-          "key": "papper"
+        "title": "Цвет",
+        "wrapperKey": "color",
+        "variants": [
+        {
+            "name": "Красный",
+            "filterKey": "red"
+        },
+        {
+            "name": "Белый",
+            "filterKey": "white"
+        },
+        {
+            "name": "Синий",
+            "filterKey": "blue"
+        },
+        {
+            "name": "Розовый",
+            "filterKey": "pink"
+        }
+      ]
       },
       {
-          "name": "Стеклообои",
-          "key": "glassWallpaper"
-      },
-      {
-          "name": "Жидкие",
-          "key": "liquid"
+        "title": "Цена",
+        "wrapperKey": "price",
+        "variants": [
+        {
+            "name": "Все",
+            "filterKey": "all"
+        },
+        {
+            "name": "От",
+            "filterKey": "stard"
+        },
+        {
+            "name": "До",
+            "filterKey": "end"
+        }
+      ]
       }
-    ]
-  },
-  {
-      "title": "Цвет",
-      "key": "color",
-      "variants": [
-      {
-          "name": "Красный",
-          "key": "red"
-      },
-      {
-          "name": "Белый",
-          "key": "white"
-      },
-      {
-          "name": "Синий",
-          "key": "blue"
-      },
-      {
-          "name": "Розовый",
-          "key": "pink"
-      }
-    ]
-  },
-  {
-      "title": "Цена",
-      "key": "price",
-      "variants": [
-      {
-          "name": "Все",
-          "key": "all"
-      },
-      {
-          "name": "От",
-          "key": "stard"
-      },
-      {
-          "name": "До",
-          "key": "end"
-      }
-    ]
+    ]  
   }
-]
 }

@@ -35,3 +35,17 @@ export const filtersFetchingError = () => {
     type: 'FILTERS_FETCHING_ERROR'
   }
 };
+
+// export const addActiveFilters = (data) => {
+//   return {
+//     type: 'ACTIVE_FILTERS_ADDED',
+//     payload: data
+//   }
+// };
+
+// export const deleteActiveFilters = (data) => {
+//   return {
+//     type: 'ACTIVE_FILTERS_DELETED',
+//     payload: data
+//   }
+// };

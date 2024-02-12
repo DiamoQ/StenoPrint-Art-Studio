@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, createRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import CatalogFilterBlock from './CatalogFilterBlock';
 
@@ -9,10 +9,10 @@ import { filtersFetching, filtersFetched, filtersFetchingError } from '../../act
 
 import './catalog.scss';
 
-
 const CatalogFilter = () => {
 
   const { filters, filtersLoadingStatus } = useSelector(state => state);
+  const [elements, setElementsValue] = useState(null);
   const dispatch = useDispatch();
   const { request } = useHttp();
 
@@ -23,6 +23,10 @@ const CatalogFilter = () => {
       .catch(() => dispatch(filtersFetchingError))
   }, [])
 
+  useEffect(() => {
+    setElementsValue(renderFiltersList(filters))
+  }, [filters])
+
   if (filtersLoadingStatus === "loading") {
     return <Spinner />;
   } else if (filtersLoadingStatus === "error") {
@@ -30,16 +34,26 @@ const CatalogFilter = () => {
   }
 
   const renderFiltersList = (arr) => {
-    return arr.map((item) => {
-      console.log()
-      return <CatalogFilterBlock key={item.title} filters={item}/>
-    })
-  }
+    if (Object.keys(arr).length > 0) {
+      return arr.wrapperFilters.map((item) => {
+        return <CatalogFilterBlock key={item.wrapperKey} filters={item}/>
+      })
+    }
 
-  const elements = renderFiltersList(filters);
+    return null
+  }
+  
   return (
     <div className='catalog__goods-filters'>
       {elements}
+      <div className='catalog__goods-filters__buttons'>
+        <div className='catalog__goods-filters__button catalog__goods-filters__button--add'>
+          Применить
+        </div>
+        <div className='catalog__goods-filters__button catalog__goods-filters__button--cancel'>
+          Сбросить
+        </div>
+      </div>
     </div>
   )
 }

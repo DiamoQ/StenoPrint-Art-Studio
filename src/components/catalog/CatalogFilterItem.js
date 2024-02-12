@@ -1,41 +1,76 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const CatalogFilterItem = ({ item, key }) => {
+// import { addActiveFilters, deleteActiveFilters } from '../../actions';
+
+const CatalogFilterItem = ({ item, wrapperKey }) => {
+  // const { activeFilters } = useSelector(state => state);
   const [visibleFilter, setVisibleFilter] = useState(true);
+  const [filterValue, setFilterValue] = useState(0);
+  // const [inputChecked, setInputChecked] = useState(false);
   const { goods } = useSelector(state => state);
+  const { name, filterKey} = item;
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setFilterValue(createFilterCurrent(name, goods, wrapperKey))
+  }, [goods])
+  
+  // useEffect(() => {
+  //   inputChecked ? addActiveFilter(activeFilters, filterKey): removeActiveFilter(activeFilters, filterKey);
+  // }, [inputChecked])
+
+  // const removeActiveFilter = (activeFilters, key) => {
+  //   if (activeFilters.includes(key)) {
+  //     return  dispatch(deleteActiveFilters(key));
+  //   }
+
+  //   return null;
+  // }
+
+  // const addActiveFilter = (activeFilters, key) => {
+  //   if (activeFilters.includes(key)) {
+  //     return null;
+  //   }
+    
+  //   return dispatch(addActiveFilters(key));
+  // }
 
   const toggleVisibleClassForFiltersBlock = () => {
-    setVisibleFilter(() => !visibleFilter)
+    setVisibleFilter(false)
   }
 
-  const createFilterCurrent = (item, goods, key) => {
-    const filterCurrent = goods.filter(good => {
-      if (key === "collection") {
-        return good.collection.filter(collection => collection === item.name).length > 0 ? good : null
-      } else if (key === "material") {
-        return good.material === item.name ? good : null
-      } else if (key === "color") {
-        return good.color === item.name ? good : null
+  const createFilterCurrent = (name, goods, wrapperKey) => {
+    if (goods.length > 0) {
+      let filterCurrent = goods.filter(good => {
+        if (wrapperKey === "collection") {
+          return good.collection.includes(name) ? good : null
+        } else if (wrapperKey === "material") {
+          return good.material === name ? good : null
+        } else if (wrapperKey === "color") {
+          return good.color === name ? good : null
+        }
+      }).length;
+      
+      if (filterCurrent === 0) {
+        toggleVisibleClassForFiltersBlock()
       }
-    }).length;
-    
-    if (filterCurrent === 0) {
-      toggleVisibleClassForFiltersBlock()
+
+      return filterCurrent;
     }
 
-    return filterCurrent;
+    return null;
   }
 
   return (
-    <div key={item.key} className={`catalog__goods-filters__filter ${visibleFilter ? 'catalog__goods-filters__filter--active' : ''}`}>
+    visibleFilter ? <div className={'catalog__goods-filters__filter'}>
       <div className='catalog__goods-filters__input'>
-        <input value={item.key} type='checkbox' id={item.key} />
-        <label className='catalog__goods-filters__label' htmlFor={item.key}>{item.name}</label>
+        {/* <input value={filterKey} type='checkbox' checked={inputChecked} onChange={() => setInputChecked(!inputChecked)} id={filterKey} /> */}
+        <input value={filterKey} type='checkbox' id={filterKey} />
+        <label className='catalog__goods-filters__label'  htmlFor={filterKey}>{name}</label>
       </div>
-      <span className='catalog__goods-filters__current'>{createFilterCurrent(item, goods, key)}</span>
-    </div>
-
+      <span className='catalog__goods-filters__current'>{filterValue}</span>
+    </div> : null
   )
 }
 
