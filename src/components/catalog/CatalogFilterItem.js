@@ -1,23 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // import { addActiveFilters, deleteActiveFilters } from '../../actions';
 
-const CatalogFilterItem = ({ item, wrapperKey }) => {
+const CatalogFilterItem = ({ item, filterWrapperRef }) => {
   // const { activeFilters } = useSelector(state => state);
   const [visibleFilter, setVisibleFilter] = useState(true);
-  const [filterValue, setFilterValue] = useState(0);
+  const [filterValue, setFilterValue] = useState();
   // const [inputChecked, setInputChecked] = useState(false);
   const { goods } = useSelector(state => state);
-  const { name, filterKey} = item;
+  const { name, filterRef} = item;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFilterValue(createFilterCurrent(name, goods, wrapperKey))
+    setFilterValue(createFilterCurrent(name, goods, filterWrapperRef))
+    
   }, [goods])
+
+  useMemo(() => {
+    filterValue === 0 ? setVisibleFilter(false): setVisibleFilter(true) ;
+  }, [filterValue])
   
   // useEffect(() => {
-  //   inputChecked ? addActiveFilter(activeFilters, filterKey): removeActiveFilter(activeFilters, filterKey);
+  //   inputChecked ? addActiveFilter(activeFilters, filterRef): removeActiveFilter(activeFilters, filterRef);
   // }, [inputChecked])
 
   // const removeActiveFilter = (activeFilters, key) => {
@@ -36,38 +41,26 @@ const CatalogFilterItem = ({ item, wrapperKey }) => {
   //   return dispatch(addActiveFilters(key));
   // }
 
-  const toggleVisibleClassForFiltersBlock = () => {
-    setVisibleFilter(false)
-  }
-
-  const createFilterCurrent = (name, goods, wrapperKey) => {
-    if (goods.length > 0) {
-      let filterCurrent = goods.filter(good => {
-        if (wrapperKey === "collection") {
-          return good.collection.includes(name) ? good : null
-        } else if (wrapperKey === "material") {
-          return good.material === name ? good : null
-        } else if (wrapperKey === "color") {
-          return good.color === name ? good : null
-        }
-      }).length;
+  const createFilterCurrent = (name, goods, filterWrapperRef) => {
+    if (goods.length === 0) return null;
       
-      if (filterCurrent === 0) {
-        toggleVisibleClassForFiltersBlock()
+    return goods.filter(good => {
+      if (filterWrapperRef === "collection") {
+        return good.collection.includes(name);
+      } else if (filterWrapperRef === "material") {
+        return good.material === name;
+      } else if (filterWrapperRef === "color") {
+        return good.color === name;
       }
-
-      return filterCurrent;
-    }
-
-    return null;
+    }).length;
   }
 
   return (
     visibleFilter ? <div className={'catalog__goods-filters__filter'}>
       <div className='catalog__goods-filters__input'>
-        {/* <input value={filterKey} type='checkbox' checked={inputChecked} onChange={() => setInputChecked(!inputChecked)} id={filterKey} /> */}
-        <input value={filterKey} type='checkbox' id={filterKey} />
-        <label className='catalog__goods-filters__label'  htmlFor={filterKey}>{name}</label>
+        {/* <input value={filterRef} type='checkbox' checked={inputChecked} onChange={() => setInputChecked(!inputChecked)} id={filterRef} /> */}
+        <input value={filterRef} type='checkbox' id={filterRef} />
+        <label className='catalog__goods-filters__label'  htmlFor={filterRef}>{name}</label>
       </div>
       <span className='catalog__goods-filters__current'>{filterValue}</span>
     </div> : null

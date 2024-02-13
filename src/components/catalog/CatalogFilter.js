@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import CatalogFilterBlock from './CatalogFilterBlock';
 
@@ -16,6 +16,16 @@ const CatalogFilter = () => {
   const dispatch = useDispatch();
   const { request } = useHttp();
 
+  const renderFiltersList = (arr) => {
+    if (Object.keys(arr).length > 0) {
+      return arr.wrapperFilters.map((item) => {
+        return <CatalogFilterBlock filters={item}/>
+      })
+    }
+
+    return null
+  }
+
   useEffect(() => {
     dispatch(filtersFetching());
     request("http://localhost:3001/filters")
@@ -23,7 +33,7 @@ const CatalogFilter = () => {
       .catch(() => dispatch(filtersFetchingError))
   }, [])
 
-  useEffect(() => {
+  useMemo(() => {
     setElementsValue(renderFiltersList(filters))
   }, [filters])
 
@@ -31,16 +41,6 @@ const CatalogFilter = () => {
     return <Spinner />;
   } else if (filtersLoadingStatus === "error") {
     return <h2>Ошибка загрузки</h2>
-  }
-
-  const renderFiltersList = (arr) => {
-    if (Object.keys(arr).length > 0) {
-      return arr.wrapperFilters.map((item) => {
-        return <CatalogFilterBlock key={item.wrapperKey} filters={item}/>
-      })
-    }
-
-    return null
   }
   
   return (

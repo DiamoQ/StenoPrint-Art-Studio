@@ -1,14 +1,24 @@
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './catalog.scss';
 
 const CatalogGoodsItem = ({ name ,photo, price, oldPrice, articul, discount, popular, newGood }) => {
+  
+  const [photoPath, setPhotoPath] = useState(null);
+
+  useMemo(() => {
+    (async () => {
+        const module = await import(`../../assets/${photo}`);
+        setPhotoPath(module.default);
+    })();
+  }, [photo]);
 
   return (
     <li className='catalog__goods-item'>
       <Link to='#'>
         <div className='catalog__goods-image__block'>
-          <img src={require('../../assets/' + photo).default} className='catalog__goods-image' alt='Фотография обоев'/>
+          <img src={photoPath} className='catalog__goods-image' alt='Фотография обоев'/>
           {discount || popular || newGood ? <div className='tag-block'>
             {discount ? <span className='discount'> -{discount}% </span> : null}
             {popular ? <span className='popular'>Популярное</span> : null}

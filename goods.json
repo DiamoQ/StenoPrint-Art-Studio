@@ -138,89 +138,89 @@
     "wrapperFilters": [
       {
         "title": "Коллекция",
-        "wrapperKey": "collection",
+        "filterWrapperRef": "collection",
         "variants": [
           {
             "name": "Градиенты",
-            "filterKey": "gradient"
+            "filterRef": "gradient"
           },
           {
             "name": "Акварель",
-            "filterKey": "acvarel"
+            "filterRef": "acvarel"
           },
           {
             "name": "Модерн",
-            "filterKey": "modern"
+            "filterRef": "modern"
           },
           {
             "name": "Цветы",
-            "filterKey": "flowers"
+            "filterRef": "flowers"
           },
           {
             "name": "Классика",
-            "filterKey": "classic"
+            "filterRef": "classic"
           }
         ]
       },
       {
         "title": "Материал",
-        "wrapperKey": "material",
+        "filterWrapperRef": "material",
         "variants": [
         {
             "name": "Флизелин",
-            "filterKey": "flizelin"
+            "filterRef": "flizelin"
         },
         {
             "name": "Бумага",
-            "filterKey": "papper"
+            "filterRef": "papper"
         },
         {
             "name": "Стеклообои",
-            "filterKey": "glassWallpaper"
+            "filterRef": "glassWallpaper"
         },
         {
             "name": "Жидкие",
-            "filterKey": "liquid"
+            "filterRef": "liquid"
         }
       ]
       },
       {
         "title": "Цвет",
-        "wrapperKey": "color",
+        "filterWrapperRef": "color",
         "variants": [
         {
             "name": "Красный",
-            "filterKey": "red"
+            "filterRef": "red"
         },
         {
             "name": "Белый",
-            "filterKey": "white"
+            "filterRef": "white"
         },
         {
             "name": "Синий",
-            "filterKey": "blue"
+            "filterRef": "blue"
         },
         {
             "name": "Розовый",
-            "filterKey": "pink"
+            "filterRef": "pink"
         }
       ]
       },
       {
         "title": "Цена",
-        "wrapperKey": "price",
+        "filterWrapperRef": "price",
         "variants": [
         {
             "name": "Все",
-            "filterKey": "all"
+            "filterRef": "all"
         },
         {
             "name": "От",
-            "filterKey": "stard"
+            "filterRef": "start"
         },
         {
             "name": "До",
-            "filterKey": "end"
+            "filterRef": "end"
         }
       ]
       }
