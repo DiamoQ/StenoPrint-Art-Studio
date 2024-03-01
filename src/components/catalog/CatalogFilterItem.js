@@ -1,69 +1,62 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-// import { addActiveFilters, deleteActiveFilters } from '../../actions';
+import { addActiveFilters, deleteActiveFilters } from '../../actions';
 
-const CatalogFilterItem = ({ item, filterWrapperRef }) => {
-  // const { activeFilters } = useSelector(state => state);
+const CatalogFilterItem = ({ item, wrapperKey }) => {
+  const { activeFiltersPull, activeFilters } = useSelector(state => state);
   const [visibleFilter, setVisibleFilter] = useState(true);
   const [filterValue, setFilterValue] = useState();
-  // const [inputChecked, setInputChecked] = useState(false);
+  const [inputChecked, setInputChecked] = useState(false);
   const { goods } = useSelector(state => state);
-  const { name, filterRef} = item;
+  const { name, variantKey} = item;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setFilterValue(createFilterCurrent(name, goods, filterWrapperRef))
-    
+    setFilterValue(calculateFilterValue(name, goods, wrapperKey))
   }, [goods])
 
-  useMemo(() => {
-    filterValue === 0 ? setVisibleFilter(false): setVisibleFilter(true) ;
+  useEffect(() => {
+    filterValue === 0 ? setVisibleFilter(false): setVisibleFilter(true);
   }, [filterValue])
-  
-  // useEffect(() => {
-  //   inputChecked ? addActiveFilter(activeFilters, filterRef): removeActiveFilter(activeFilters, filterRef);
-  // }, [inputChecked])
 
-  // const removeActiveFilter = (activeFilters, key) => {
-  //   if (activeFilters.includes(key)) {
-  //     return  dispatch(deleteActiveFilters(key));
-  //   }
+  useEffect(() => {
+    if(activeFilters.material.length === 0 && activeFilters.color.length === 0 && activeFilters.collection.length === 0 &&  inputChecked)  setInputChecked(false);
+  }, [activeFilters])
 
-  //   return null;
-  // }
+  const changeActiveFilter = (activeFiltersPull, name, wrapperFiltersKey) => {
+    setInputChecked(!inputChecked)
+    if (activeFiltersPull.color.includes(name) || activeFiltersPull.material.includes(name) || activeFiltersPull.collection.includes(name)) {
+      return  dispatch(deleteActiveFilters(name, wrapperFiltersKey));
+    }
 
-  // const addActiveFilter = (activeFilters, key) => {
-  //   if (activeFilters.includes(key)) {
-  //     return null;
-  //   }
-    
-  //   return dispatch(addActiveFilters(key));
-  // }
+    return dispatch(addActiveFilters(name, wrapperFiltersKey));
+  }
 
-  const createFilterCurrent = (name, goods, filterWrapperRef) => {
+  // Функция подсчета товара относящегося к определенному фильтру. name - название фильтра, goods - массив товаров, wrapperKey - категория фильтра. 
+  const calculateFilterValue = (name, goods, wrapperKey) => {
     if (goods.length === 0) return null;
       
     return goods.filter(good => {
-      if (filterWrapperRef === "collection") {
+      if (wrapperKey === "collection") {
         return good.collection.includes(name);
-      } else if (filterWrapperRef === "material") {
+      } else if (wrapperKey === "material") {
         return good.material === name;
-      } else if (filterWrapperRef === "color") {
+      } else if (wrapperKey === "color") {
         return good.color === name;
       }
     }).length;
   }
 
-  return (
-    visibleFilter ? <div className={'catalog__goods-filters__filter'}>
+  if (!visibleFilter) return null;
+  return ( 
+    <div className={'catalog__goods-filters__filter'}>
       <div className='catalog__goods-filters__input'>
-        {/* <input value={filterRef} type='checkbox' checked={inputChecked} onChange={() => setInputChecked(!inputChecked)} id={filterRef} /> */}
-        <input value={filterRef} type='checkbox' id={filterRef} />
-        <label className='catalog__goods-filters__label'  htmlFor={filterRef}>{name}</label>
+        <input value={variantKey} type='checkbox' checked={inputChecked} onChange={() => changeActiveFilter(activeFiltersPull, name, wrapperKey)} id={variantKey} />
+        <label className='catalog__goods-filters__label' htmlFor={variantKey}>{name}</label>
       </div>
       <span className='catalog__goods-filters__current'>{filterValue}</span>
-    </div> : null
+    </div>
   )
 }
 

@@ -73,9 +73,9 @@
       },
       "catalogFilter": "Фирменные обои",
       "collection": [
-        "Цветы",
+        "Акварель",
         "Модерн",
-        "Градиенты"
+        "Классика"
       ],
       "material": "Флизелин",
       "color": "Красный",
@@ -138,89 +138,89 @@
     "wrapperFilters": [
       {
         "title": "Коллекция",
-        "filterWrapperRef": "collection",
+        "wrapperKey": "collection",
         "variants": [
           {
             "name": "Градиенты",
-            "filterRef": "gradient"
+            "variantKey": "gradient"
           },
           {
             "name": "Акварель",
-            "filterRef": "acvarel"
+            "variantKey": "acvarel"
           },
           {
             "name": "Модерн",
-            "filterRef": "modern"
+            "variantKey": "modern"
           },
           {
             "name": "Цветы",
-            "filterRef": "flowers"
+            "variantKey": "flowers"
           },
           {
             "name": "Классика",
-            "filterRef": "classic"
+            "variantKey": "classic"
           }
         ]
       },
       {
         "title": "Материал",
-        "filterWrapperRef": "material",
+        "wrapperKey": "material",
         "variants": [
         {
             "name": "Флизелин",
-            "filterRef": "flizelin"
+            "variantKey": "flizelin"
         },
         {
             "name": "Бумага",
-            "filterRef": "papper"
+            "variantKey": "papper"
         },
         {
             "name": "Стеклообои",
-            "filterRef": "glassWallpaper"
+            "variantKey": "glassWallpaper"
         },
         {
             "name": "Жидкие",
-            "filterRef": "liquid"
+            "variantKey": "liquid"
         }
       ]
       },
       {
         "title": "Цвет",
-        "filterWrapperRef": "color",
+        "wrapperKey": "color",
         "variants": [
         {
             "name": "Красный",
-            "filterRef": "red"
+            "variantKey": "red"
         },
         {
             "name": "Белый",
-            "filterRef": "white"
+            "variantKey": "white"
         },
         {
             "name": "Синий",
-            "filterRef": "blue"
+            "variantKey": "blue"
         },
         {
             "name": "Розовый",
-            "filterRef": "pink"
+            "variantKey": "pink"
         }
       ]
       },
       {
         "title": "Цена",
-        "filterWrapperRef": "price",
+        "wrapperKey": "price",
         "variants": [
         {
             "name": "Все",
-            "filterRef": "all"
+            "variantKey": "all"
         },
         {
             "name": "От",
-            "filterRef": "start"
+            "variantKey": "start"
         },
         {
             "name": "До",
-            "filterRef": "end"
+            "variantKey": "end"
         }
       ]
       }

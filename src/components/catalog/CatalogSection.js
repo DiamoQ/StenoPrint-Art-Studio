@@ -1,10 +1,11 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './catalog.scss';
 
 const CatalogSection = ({title, value,  photos}) => {
   const [photoPath, setPhotoPath] = useState(null);
 
-  useMemo(() => {
+  // Функция для построения пути к картинкам, приходящем как массив названий.
+  useEffect(() => {
     const importPhotos = async () => {
         const module =  await Promise.all(photos.map(async (item) => {
           const photoModule = await import(`../../assets/${item}`);
@@ -15,9 +16,6 @@ const CatalogSection = ({title, value,  photos}) => {
 
     importPhotos();
   }, [photos]);
-
-  console.log(photos)
-  console.log(photoPath)
 
   return (
     <li className='catalog__sections-item'>

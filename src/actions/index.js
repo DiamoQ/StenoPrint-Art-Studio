@@ -36,16 +36,30 @@ export const filtersFetchingError = () => {
   }
 };
 
-// export const addActiveFilters = (data) => {
-//   return {
-//     type: 'ACTIVE_FILTERS_ADDED',
-//     payload: data
-//   }
-// };
+export const applyActiveFilters = () => {
+  return {
+    type: 'ACTIVE_FILTERS_APPLIED',
+  }
+};
 
-// export const deleteActiveFilters = (data) => {
-//   return {
-//     type: 'ACTIVE_FILTERS_DELETED',
-//     payload: data
-//   }
-// };
+export const clearActiveFilters = () => {
+  return {
+    type: 'ACTIVE_FILTERS_CLEARED',
+  }
+};
+
+export const addActiveFilters = (filter, wrapperFiltersKey) => {
+  return {
+    type: 'ACTIVE_FILTERS_ADDED',
+    payload: filter,
+    filterKey: wrapperFiltersKey
+  }
+};
+
+export const deleteActiveFilters = (filter, wrapperFiltersKey) => {
+  return {
+    type: 'ACTIVE_FILTERS_DELETED',
+    payload: filter,
+    filterKey: wrapperFiltersKey
+  }
+};

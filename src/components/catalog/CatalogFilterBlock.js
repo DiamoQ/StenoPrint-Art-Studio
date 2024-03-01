@@ -5,21 +5,18 @@ import CatalogFilterItem from './CatalogFilterItem';
 import './catalog.scss';
 
 const CatalogFilterBlock = ({ filters }) => {
-  const { title, filterWrapperRef, variants } = filters;
+  const { title, wrapperKey, variants } = filters;
   const [activeFilter, setActiveFilter] = useState(false);
-  const [elements, setElements] = useState();
   const [maxHeight, setMaxHeight] = useState('60px');
-  const refComponent1 = createRef();
-  const refComponent2 = createRef();
+  const filterNameRef = createRef();
+  const filterWrapperRef = createRef();
 
   useEffect(() => {
-    let newHeight = refComponent1.current.getBoundingClientRect().height + refComponent2.current.getBoundingClientRect().height;
-    setMaxHeight(`${newHeight + 20}px`)
+    let newHeight = filterNameRef.current.getBoundingClientRect().height + filterWrapperRef.current.getBoundingClientRect().height;
+    setMaxHeight(`${newHeight + 82}px`)
   }, []);
  
-  useMemo(() => {
-    setElements(variants.map(item => <CatalogFilterItem item={item} filterWrapperRef={filterWrapperRef}/>));
-  }, [variants]);
+  const elements = useMemo(() => variants.map(item => <CatalogFilterItem item={item} wrapperKey={wrapperKey}/>), [variants, wrapperKey]);
 
   const toggleActiveClassForFiltersBlock = () => {
     setActiveFilter(() => !activeFilter)
@@ -28,8 +25,8 @@ const CatalogFilterBlock = ({ filters }) => {
   return (
     <div style={{ maxHeight: `${activeFilter ? maxHeight : '60px'}` }}
       className={`${activeFilter ? 'active' : ' '} catalog__goods-filters__collections catalog__goods-filters__block`}>
-      <span className='catalog__goods-filters__name' ref={refComponent1} onClick={(e) => toggleActiveClassForFiltersBlock()}>{title}</span>
-      <div className='catalog__goods-filters__wrapper' ref={refComponent2}>
+      <span className='catalog__goods-filters__name' ref={filterNameRef} onClick={(e) => toggleActiveClassForFiltersBlock()}>{title}</span>
+      <div className='catalog__goods-filters__wrapper' ref={filterWrapperRef}>
         {elements}
       </div>
     </div>

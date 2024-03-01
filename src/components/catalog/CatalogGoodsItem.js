@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './catalog.scss';
@@ -7,7 +7,8 @@ const CatalogGoodsItem = ({ name ,photo, price, oldPrice, articul, discount, pop
   
   const [photoPath, setPhotoPath] = useState(null);
 
-  useMemo(() => {
+  // Функция для построения пути к картинке, приходящей в виде названия. 
+  useEffect(() => {
     (async () => {
         const module = await import(`../../assets/${photo}`);
         setPhotoPath(module.default);

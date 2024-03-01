@@ -1,56 +1,52 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useHttp } from '../../hooks/http.hook';
 import CatalogFilterBlock from './CatalogFilterBlock';
 
 import Spinner from '../spinner/Spinner';
 
-import { filtersFetching, filtersFetched, filtersFetchingError } from '../../actions';
+import { filtersFetching, filtersFetched, filtersFetchingError, applyActiveFilters, clearActiveFilters } from '../../actions';
 
 import './catalog.scss';
 
 const CatalogFilter = () => {
-
   const { filters, filtersLoadingStatus } = useSelector(state => state);
-  const [elements, setElementsValue] = useState(null);
   const dispatch = useDispatch();
   const { request } = useHttp();
-
-  const renderFiltersList = (arr) => {
-    if (Object.keys(arr).length > 0) {
-      return arr.wrapperFilters.map((item) => {
-        return <CatalogFilterBlock filters={item}/>
-      })
-    }
-
-    return null
-  }
 
   useEffect(() => {
     dispatch(filtersFetching());
     request("http://localhost:3001/filters")
-      .then(data => dispatch(filtersFetched(data)))
-      .catch(() => dispatch(filtersFetchingError))
+    .then(data => dispatch(filtersFetched(data)))
+    .catch(() => dispatch(filtersFetchingError))
   }, [])
+  
+  const renderFiltersList = useCallback((filters) => {
+    if (Object.keys(filters).length > 0) {
+      return filters.wrapperFilters.map((item) => {
+        return <CatalogFilterBlock filters={item}/>
+      })
+    }
 
-  useMemo(() => {
-    setElementsValue(renderFiltersList(filters))
-  }, [filters])
+    return null;
+  }, [filters]);
 
   if (filtersLoadingStatus === "loading") {
     return <Spinner />;
   } else if (filtersLoadingStatus === "error") {
     return <h2>Ошибка загрузки</h2>
   }
+
+  const elements = renderFiltersList(filters);
   
   return (
     <div className='catalog__goods-filters'>
       {elements}
       <div className='catalog__goods-filters__buttons'>
-        <div className='catalog__goods-filters__button catalog__goods-filters__button--add'>
+        <div className='catalog__goods-filters__button catalog__goods-filters__button--add' onClick={() => dispatch(applyActiveFilters())}>
           Применить
         </div>
-        <div className='catalog__goods-filters__button catalog__goods-filters__button--cancel'>
+        <div className='catalog__goods-filters__button catalog__goods-filters__button--cancel' onClick={() => dispatch(clearActiveFilters())}>
           Сбросить
         </div>
       </div>
