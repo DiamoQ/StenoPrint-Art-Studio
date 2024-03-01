@@ -102,7 +102,7 @@
       &:hover {
         .catalog__goods-image {
           transform: scale(1.1);
-          transition: transform .6s ease;
+          transition: transform 0.6s ease;
         }
       }
     }
@@ -120,7 +120,7 @@
       width: 100%;
       height: 350px;
       transform: scale(1);
-      transition: transform .6s ease;
+      transition: transform 0.6s ease;
     }
 
     &-description {
@@ -181,7 +181,51 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      max-width: 350px;
+      padding-right: 10px;
       flex: 1;
+
+      &__buttons {
+        display: flex;
+        gap: 10px;
+        padding-top: 20px;
+      }
+
+      &__button {
+        width: 50%;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+
+        &--add {
+          padding-top: 20px;
+          padding-bottom: 20px;
+          border-radius: 50px;
+          background: $main;
+          color: $white;
+          font-size: 14px;
+          line-height: 140%;
+        }
+
+        &--cancel {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 16px;
+          line-height: 22px;
+
+          &::before {
+            content: ' ';
+            background-image: url(../../assets/cancelFilters.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            width: 11px;
+            height: 11px;
+            margin-right: 10px;
+          }
+        }
+      }
 
       &__block {
         display: flex;
@@ -192,13 +236,12 @@
         width: 100%;
         height: 100%;
         gap: 0px;
-        transition: max-height .3s ease;
-        margin-right: 5px;
+        transition: max-height 0.3s ease;
 
         &.active {
           height: fit-content;
           gap: 42px;
-          transition: max-height .3s ease;
+          transition: max-height 0.3s ease;
 
           .catalog__goods-filters__wrapper {
             position: relative;
@@ -210,7 +253,7 @@
           .catalog__goods-filters__name {
             &::after {
               transform: translateY(-50%) rotateX(180deg);
-              transition: transform .3s ease;
+              transition: transform 0.3s ease;
             }
           }
         }
@@ -225,7 +268,6 @@
         white-space: nowrap;
         font-size: 16px;
         font-weight: 600;
-        line-height: 140%; /* 22.4px */
 
         &::after {
           content: " ";
@@ -240,7 +282,7 @@
           background-position: center;
           top: 50%;
           transform: translateY(-50%) rotateX(0deg);
-          transition: transform .3s ease;
+          transition: transform 0.3s ease;
         }
       }
 
@@ -251,7 +293,7 @@
         opacity: 0;
         flex-direction: column;
         gap: 10px;
-        transition: opacity .3s ease;
+        transition: opacity 0.3s ease;
       }
 
       &__filter {

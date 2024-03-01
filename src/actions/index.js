@@ -35,3 +35,31 @@ export const filtersFetchingError = () => {
     type: 'FILTERS_FETCHING_ERROR'
   }
 };
+
+export const applyActiveFilters = () => {
+  return {
+    type: 'ACTIVE_FILTERS_APPLIED',
+  }
+};
+
+export const clearActiveFilters = () => {
+  return {
+    type: 'ACTIVE_FILTERS_CLEARED',
+  }
+};
+
+export const addActiveFilters = (filter, wrapperFiltersKey) => {
+  return {
+    type: 'ACTIVE_FILTERS_ADDED',
+    payload: filter,
+    filterKey: wrapperFiltersKey
+  }
+};
+
+export const deleteActiveFilters = (filter, wrapperFiltersKey) => {
+  return {
+    type: 'ACTIVE_FILTERS_DELETED',
+    payload: filter,
+    filterKey: wrapperFiltersKey
+  }
+};
